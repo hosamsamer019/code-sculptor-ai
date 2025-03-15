@@ -3,8 +3,22 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CodeGenerator from "@/components/CodeGenerator";
 import WebsiteCloneSection from "@/components/WebsiteCloneSection";
+import { useState } from "react";
 
 const Index = () => {
+  const [prompt, setPrompt] = useState("");
+
+  const handleGenerateCode = (newPrompt: string) => {
+    setPrompt(newPrompt);
+    console.log("تم تمرير الطلب إلى مولد الكود:", newPrompt);
+    
+    // قم بالتمرير إلى مكون توليد الكود
+    const codeGeneratorElement = document.getElementById("code-generator");
+    if (codeGeneratorElement) {
+      codeGeneratorElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-950 text-white">
       <Header />
@@ -23,13 +37,11 @@ const Index = () => {
             </p>
           </div>
           
-          <CodeGenerator />
+          <div id="code-generator">
+            <CodeGenerator initialPrompt={prompt} />
+          </div>
           
-          <WebsiteCloneSection onGenerateCode={(prompt) => {
-            // هنا يمكننا الوصول إلى مكون CodeGenerator والتحكم به
-            // لكن للتبسيط في هذه المرحلة، سنعرض رسالة إعلامية
-            console.log("تم تمرير الطلب إلى مولد الكود:", prompt);
-          }} />
+          <WebsiteCloneSection onGenerateCode={handleGenerateCode} />
         </div>
       </main>
       
