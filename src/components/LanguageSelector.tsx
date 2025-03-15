@@ -1,62 +1,72 @@
 
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import React from "react";
+import { Check, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export type CodeLanguage = {
-  id: string;
-  name: string;
-  frontend?: boolean;
-  backend?: boolean;
-};
+interface LanguageSelectorProps {
+  value: string; 
+  onChange: (value: string) => void;
+}
 
-type LanguageSelectorProps = {
-  selectedLanguage: string;
-  onSelectLanguage: (language: string) => void;
-};
-
-const LanguageSelector = ({ selectedLanguage, onSelectLanguage }: LanguageSelectorProps) => {
-  const languages: CodeLanguage[] = [
-    { id: "react", name: "React", frontend: true },
-    { id: "angular", name: "Angular", frontend: true },
-    { id: "vue", name: "Vue.js", frontend: true },
-    { id: "html", name: "HTML/CSS", frontend: true },
-    { id: "nodejs", name: "Node.js", backend: true },
-    { id: "python", name: "Python", backend: true },
-    { id: "php", name: "PHP", backend: true },
-    { id: "fullstack", name: "Full Stack (React + Node.js)", frontend: true, backend: true },
-    { id: "wordpress", name: "WordPress", frontend: true, backend: true },
-    { id: "shopify", name: "Shopify", frontend: true },
-  ];
-
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onChange }) => {
   return (
-    <div className="w-full max-w-xs mx-auto">
-      <label className="block text-sm font-medium text-gray-200 mb-2 text-right">
-        اختر التقنية المطلوبة
-      </label>
-      <Select value={selectedLanguage} onValueChange={onSelectLanguage}>
-        <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
-          <SelectValue placeholder="اختر التقنية المطلوبة" />
-        </SelectTrigger>
-        <SelectContent className="bg-gray-800 border-gray-700 text-white">
-          {languages.map((language) => (
-            <SelectItem key={language.id} value={language.id}>
-              {language.name}
-              {language.frontend && language.backend 
-                ? " (Frontend/Backend)" 
-                : language.frontend 
-                ? " (Frontend)" 
-                : " (Backend)"}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="w-full flex justify-between items-center">
+          <span>{getLanguageLabel(value)}</span>
+          <ChevronDown className="h-4 w-4 opacity-50" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end">
+        <DropdownMenuRadioGroup value={value} onValueChange={onChange}>
+          <DropdownMenuRadioItem value="javascript">
+            JavaScript
+            {value === "javascript" && <Check className="h-4 w-4 ml-auto" />}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="react">
+            React
+            {value === "react" && <Check className="h-4 w-4 ml-auto" />}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="html">
+            HTML
+            {value === "html" && <Check className="h-4 w-4 ml-auto" />}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="python">
+            Python
+            {value === "python" && <Check className="h-4 w-4 ml-auto" />}
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="node">
+            Node.js
+            {value === "node" && <Check className="h-4 w-4 ml-auto" />}
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
+
+function getLanguageLabel(value: string): string {
+  switch (value) {
+    case "javascript":
+      return "JavaScript";
+    case "react":
+      return "React";
+    case "html":
+      return "HTML";
+    case "python":
+      return "Python";
+    case "node":
+      return "Node.js";
+    default:
+      return "اختر لغة البرمجة";
+  }
+}
 
 export default LanguageSelector;
