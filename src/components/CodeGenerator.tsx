@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Bot, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -941,4 +942,277 @@ app.get('/api/user/recently-played', (req, res) => {
 // Search API
 app.get('/api/search', (req, res) => {
   const query = (req.query.q || '').toLowerCase();
-  if (!query
+  if (!query) {
+    return res.json([]);
+  }
+  
+  let results = [];
+  
+  // Search in songs
+  songs.forEach(song => {
+    if (song.title.toLowerCase().includes(query) || 
+        song.artist.toLowerCase().includes(query) || 
+        song.album.toLowerCase().includes(query)) {
+      results.push({ type: 'song', data: song });
+    }
+  });
+  
+  // Search in playlists
+  playlists.forEach(playlist => {
+    if (playlist.title.toLowerCase().includes(query)) {
+      results.push({ type: 'playlist', data: playlist });
+    }
+  });
+  
+  return res.json(results);
+});
+
+app.listen(port, () => {
+  console.log(\`Server running on http://localhost:\${port}\`);
+});
+`;
+    }
+  };
+
+  const generateSpotifyLikePreview = (promptText: string) => {
+    return `
+    <div class="spotify-preview">
+      <aside class="sidebar">
+        <div class="logo">
+          <h1>${promptText}</h1>
+        </div>
+        <nav>
+          <ul>
+            <li class="active">الرئيسية</li>
+            <li>البحث</li>
+            <li>مكتبتك</li>
+            <li>قوائم التشغيل</li>
+          </ul>
+        </nav>
+      </aside>
+      
+      <main>
+        <section class="featured">
+          <h2>مميز لك</h2>
+          <div class="featured-items">
+            <div class="featured-item">
+              <div class="featured-cover">
+                <img src="https://picsum.photos/id/1/200" alt="Featured 1">
+              </div>
+              <h3>عنوان الألبوم 1</h3>
+              <p>فنان 1</p>
+            </div>
+            <div class="featured-item">
+              <div class="featured-cover">
+                <img src="https://picsum.photos/id/2/200" alt="Featured 2">
+              </div>
+              <h3>عنوان الألبوم 2</h3>
+              <p>فنان 2</p>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <footer class="player">
+        <div class="now-playing">
+          <div class="now-playing-info">
+            <img src="https://picsum.photos/id/10/200" alt="Currently playing">
+            <div>
+              <h4>أغنية 1</h4>
+              <p>فنان 1</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <style>
+      .spotify-preview {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        grid-template-rows: 1fr 80px;
+        grid-template-areas:
+          "sidebar main"
+          "player player";
+        height: 100%;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      .sidebar {
+        grid-area: sidebar;
+        background-color: #000;
+        padding: 24px 0;
+      }
+      .logo {
+        padding: 0 24px 24px;
+      }
+      .sidebar nav ul {
+        list-style: none;
+        padding: 0;
+      }
+      .sidebar nav ul li {
+        padding: 12px 24px;
+        cursor: pointer;
+      }
+      .sidebar nav ul li.active {
+        background-color: #282828;
+      }
+      main {
+        grid-area: main;
+        background: linear-gradient(to bottom, #434343, #121212);
+        padding: 24px;
+        overflow-y: auto;
+      }
+      .featured-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 24px;
+        margin-top: 16px;
+      }
+      .featured-item {
+        background-color: #282828;
+        padding: 16px;
+        border-radius: 6px;
+      }
+      .featured-cover img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .player {
+        grid-area: player;
+        background-color: #181818;
+        border-top: 1px solid #282828;
+        padding: 0 16px;
+      }
+      .now-playing {
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+        height: 100%;
+        align-items: center;
+      }
+      .now-playing-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .now-playing-info img {
+        width: 56px;
+        height: 56px;
+        border-radius: 4px;
+      }
+    </style>
+    `;
+  };
+
+  // Add the rest of the generator functions for other site types
+  const generateEcommerceFrontend = (lang: string, promptText: string) => {
+    // Implementation for e-commerce frontend code generation
+    return `// E-commerce frontend code for ${promptText}`;
+  };
+
+  const generateEcommerceBackend = (lang: string, promptText: string) => {
+    // Implementation for e-commerce backend code generation
+    return `// E-commerce backend code for ${promptText}`;
+  };
+
+  const generateEcommercePreview = (promptText: string) => {
+    // Implementation for e-commerce preview
+    return `<div>E-commerce preview for ${promptText}</div>`;
+  };
+
+  const generateSocialMediaFrontend = (lang: string, promptText: string) => {
+    // Implementation for social media frontend code generation
+    return `// Social media frontend code for ${promptText}`;
+  };
+
+  const generateSocialMediaBackend = (lang: string, promptText: string) => {
+    // Implementation for social media backend code generation
+    return `// Social media backend code for ${promptText}`;
+  };
+
+  const generateSocialMediaPreview = (promptText: string) => {
+    // Implementation for social media preview
+    return `<div>Social media preview for ${promptText}</div>`;
+  };
+
+  const generateBlogFrontend = (lang: string, promptText: string) => {
+    // Implementation for blog frontend code generation
+    return `// Blog frontend code for ${promptText}`;
+  };
+
+  const generateBlogBackend = (lang: string, promptText: string) => {
+    // Implementation for blog backend code generation
+    return `// Blog backend code for ${promptText}`;
+  };
+
+  const generateBlogPreview = (promptText: string) => {
+    // Implementation for blog preview
+    return `<div>Blog preview for ${promptText}</div>`;
+  };
+
+  const generateGenericFrontend = (lang: string, promptText: string) => {
+    // Implementation for generic frontend code generation
+    return `// Generic frontend code for ${promptText}`;
+  };
+
+  const generateGenericBackend = (lang: string, promptText: string) => {
+    // Implementation for generic backend code generation
+    return `// Generic backend code for ${promptText}`;
+  };
+
+  const generateGenericPreview = (promptText: string) => {
+    // Implementation for generic preview
+    return `<div>Generic preview for ${promptText}</div>`;
+  };
+
+  return (
+    <div className="relative space-y-6">
+      <div className="flex flex-col md:flex-row gap-6">
+        <Card className="flex-1 p-6 shadow-lg border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <Bot className="h-6 w-6 text-cyan-400" />
+            <h2 className="text-xl font-semibold">وصف المشروع</h2>
+          </div>
+          
+          <Textarea
+            placeholder="صف المشروع الذي تريد إنشاؤه (مثال: موقع سبوتيفاي للموسيقى العربية، متجر إلكتروني لبيع الملابس، الخ...)"
+            className="min-h-24 mb-4 bg-gray-800 border-gray-700 text-white placeholder:text-gray-400"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            <LanguageSelector value={language} onChange={setLanguage} />
+            
+            <Button 
+              className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 transition-all"
+              onClick={generateCode}
+              disabled={isGenerating}
+            >
+              {isGenerating ? (
+                <>
+                  <span className="animate-pulse">جاري توليد الكود...</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  توليد الكود
+                </>
+              )}
+            </Button>
+          </div>
+        </Card>
+      </div>
+
+      {(frontendCode || backendCode) && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <CodeDisplay frontendCode={frontendCode} backendCode={backendCode} />
+          <PreviewPanel content={previewContent} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CodeGenerator;
