@@ -11,8 +11,8 @@ const Header = () => {
         </div>
         <nav className="hidden md:flex space-x-6">
           <a href="#" className="hover:text-purple-300 transition-colors">الرئيسية</a>
-          <a href="#" className="hover:text-purple-300 transition-colors">المميزات</a>
-          <a href="#" className="hover:text-purple-300 transition-colors">التوثيق</a>
+          <a href="#" className="hover:text-purple-300 transition-colors">أمثلة الأكواد</a>
+          <a href="#" className="hover:text-purple-300 transition-colors">تطبيقات مولدة</a>
           <a href="#" className="hover:text-purple-300 transition-colors">حول</a>
         </nav>
       </div>

@@ -12,17 +12,20 @@ const PreviewPanel = ({ previewContent }: PreviewPanelProps) => {
         <Monitor className="h-5 w-5 text-purple-400" />
         <h3 className="text-white font-medium">معاينة التطبيق</h3>
       </div>
-      <div className="h-[400px] overflow-hidden relative">
+      <div className="h-[500px] overflow-hidden relative">
         {previewContent ? (
           <iframe
             srcDoc={previewContent}
             title="معاينة التطبيق"
             className="w-full h-full bg-white"
-            sandbox="allow-scripts"
+            sandbox="allow-scripts allow-same-origin"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
-            سيظهر هنا معاينة التطبيق بعد توليد الكود...
+            <p className="text-center px-4">
+              سيظهر هنا معاينة حية للتطبيق الذي تم توليده.<br/>
+              وصف ما تريد برمجته في مربع الإدخال أعلاه.
+            </p>
           </div>
         )}
       </div>

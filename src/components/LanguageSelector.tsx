@@ -1,6 +1,4 @@
 
-import { useState } from "react";
-import { Check, ChevronDown } from "lucide-react";
 import { 
   Select,
   SelectContent,
@@ -23,27 +21,26 @@ type LanguageSelectorProps = {
 
 const LanguageSelector = ({ selectedLanguage, onSelectLanguage }: LanguageSelectorProps) => {
   const languages: CodeLanguage[] = [
-    { id: "javascript", name: "JavaScript", frontend: true, backend: true },
-    { id: "typescript", name: "TypeScript", frontend: true, backend: true },
-    { id: "python", name: "Python", backend: true },
-    { id: "java", name: "Java", backend: true },
-    { id: "csharp", name: "C#", backend: true },
-    { id: "php", name: "PHP", backend: true },
-    { id: "ruby", name: "Ruby", backend: true },
-    { id: "html", name: "HTML/CSS", frontend: true },
     { id: "react", name: "React", frontend: true },
-    { id: "vue", name: "Vue.js", frontend: true },
     { id: "angular", name: "Angular", frontend: true },
+    { id: "vue", name: "Vue.js", frontend: true },
+    { id: "html", name: "HTML/CSS", frontend: true },
+    { id: "nodejs", name: "Node.js", backend: true },
+    { id: "python", name: "Python", backend: true },
+    { id: "php", name: "PHP", backend: true },
+    { id: "fullstack", name: "Full Stack (React + Node.js)", frontend: true, backend: true },
+    { id: "wordpress", name: "WordPress", frontend: true, backend: true },
+    { id: "shopify", name: "Shopify", frontend: true },
   ];
 
   return (
     <div className="w-full max-w-xs mx-auto">
       <label className="block text-sm font-medium text-gray-200 mb-2 text-right">
-        اختر لغة البرمجة
+        اختر التقنية المطلوبة
       </label>
       <Select value={selectedLanguage} onValueChange={onSelectLanguage}>
         <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
-          <SelectValue placeholder="اختر لغة البرمجة" />
+          <SelectValue placeholder="اختر التقنية المطلوبة" />
         </SelectTrigger>
         <SelectContent className="bg-gray-800 border-gray-700 text-white">
           {languages.map((language) => (

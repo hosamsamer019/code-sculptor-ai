@@ -33,10 +33,10 @@ const CodeDisplay = ({ frontendCode, backendCode }: CodeDisplayProps) => {
           </div>
           <TabsList className="bg-gray-700">
             <TabsTrigger value="frontend" className="data-[state=active]:bg-purple-600">
-              Frontend
+              واجهة المستخدم
             </TabsTrigger>
             <TabsTrigger value="backend" className="data-[state=active]:bg-purple-600">
-              Backend
+              الخادم
             </TabsTrigger>
           </TabsList>
         </div>
@@ -55,7 +55,7 @@ const CodeDisplay = ({ frontendCode, backendCode }: CodeDisplayProps) => {
               )}
             </button>
             <pre className="bg-code-background text-code-text p-4 overflow-x-auto min-h-[300px] max-h-[500px]">
-              <code>{frontendCode || "// سيظهر هنا كود الواجهة الأمامية..."}</code>
+              <code>{frontendCode || "// سيظهر هنا كود الواجهة الأمامية المولد من وصفك..."}</code>
             </pre>
           </div>
         </TabsContent>
@@ -74,7 +74,7 @@ const CodeDisplay = ({ frontendCode, backendCode }: CodeDisplayProps) => {
               )}
             </button>
             <pre className="bg-code-background text-code-text p-4 overflow-x-auto min-h-[300px] max-h-[500px]">
-              <code>{backendCode || "// سيظهر هنا كود الخلفية..."}</code>
+              <code>{backendCode || "// سيظهر هنا كود الخادم المولد من وصفك..."}</code>
             </pre>
           </div>
         </TabsContent>
