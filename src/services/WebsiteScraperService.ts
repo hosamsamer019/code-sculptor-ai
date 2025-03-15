@@ -15,34 +15,45 @@ interface ScrapedWebsiteData {
 }
 
 export class WebsiteScraperService {
-  private static API_URL = "https://api.webscraper.io/api/v1/scrape";
+  private static API_URL = "https://api.webscraper.io/api/v1/scrape"; // هذا مجرد مثال، ستحتاج إلى استخدام API حقيقي
   
   static async scrapeWebsite(url: string): Promise<ScrapedWebsiteData | null> {
     try {
+      // في الإصدار الأولي، سنقوم بمحاكاة استجابة API
       console.log(`جاري استكشاف الموقع: ${url}`);
       
       // تأخير لمحاكاة عملية الاستكشاف
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // بيانات تجريبية محسنة لنتائج الاستكشاف
+      // بيانات تجريبية محاكية لنتائج الاستكشاف
       const mockData: ScrapedWebsiteData = {
-        title: "موقع " + url.replace(/^https?:\/\/|www\.|\/.*$/g, ''),
+        title: "موقع مستكشف",
         description: `تم استكشاف الموقع ${url}`,
-        colors: ["#4338ca", "#0ea5e9", "#f97316", "#16a34a", "#8b5cf6"],
-        fonts: ["Inter", "Roboto", "Cairo", "Poppins"],
-        layout: "responsive-grid",
+        colors: ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"],
+        fonts: ["Roboto", "Open Sans", "Cairo"],
+        layout: "grid",
         elements: [
-          { type: "رأس الصفحة", content: "قائمة تنقل", style: "bg-blue-600 text-white" },
-          { type: "صورة غلاف", content: "صورة ترويجية", style: "h-96 bg-gradient-to-r" },
-          { type: "قسم ميزات", content: "عرض الميزات الرئيسية", style: "grid-cols-3" },
-          { type: "منتجات", content: "عرض المنتجات", style: "grid-cols-4 gap-4" },
-          { type: "شهادات", content: "آراء العملاء", style: "bg-gray-100" },
-          { type: "نموذج اتصال", content: "نموذج للتواصل", style: "rounded-lg shadow-lg" },
-          { type: "تذييل الصفحة", content: "روابط وحقوق النشر", style: "bg-gray-800 text-white" }
+          { type: "header", content: "رأس الصفحة", style: "bg-blue-600 text-white" },
+          { type: "hero", content: "قسم الترحيب", style: "bg-gray-100" },
+          { type: "features", content: "ميزات الموقع", style: "grid-cols-3" },
+          { type: "footer", content: "تذييل الصفحة", style: "bg-gray-800 text-white" }
         ]
       };
       
       return mockData;
+      
+      // في الإصدار النهائي، ستستخدم كود مثل هذا:
+      // const response = await fetch(this.API_URL, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ url, depth: 1 })
+      // });
+      // 
+      // if (!response.ok) {
+      //   throw new Error(`فشل في استكشاف الموقع: ${response.statusText}`);
+      // }
+      // 
+      // return await response.json();
     } catch (error) {
       console.error("خطأ في استكشاف الموقع:", error);
       toast({
