@@ -2,6 +2,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CodeGenerator from "@/components/CodeGenerator";
+import WebsiteCloneSection from "@/components/WebsiteCloneSection";
 
 const Index = () => {
   return (
@@ -23,6 +24,12 @@ const Index = () => {
           </div>
           
           <CodeGenerator />
+          
+          <WebsiteCloneSection onGenerateCode={(prompt) => {
+            // هنا يمكننا الوصول إلى مكون CodeGenerator والتحكم به
+            // لكن للتبسيط في هذه المرحلة، سنعرض رسالة إعلامية
+            console.log("تم تمرير الطلب إلى مولد الكود:", prompt);
+          }} />
         </div>
       </main>
       
