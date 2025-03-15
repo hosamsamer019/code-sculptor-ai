@@ -113,7 +113,7 @@ const CodeGenerator = ({ initialPrompt = "" }: CodeGeneratorProps) => {
     }, 3000);
   };
 
-  const getSiteTypeInArabic = (type) => {
+  const getSiteTypeInArabic = (type: string) => {
     switch (type) {
       case "spotify": return "خدمة موسيقى";
       case "ecommerce": return "متجر إلكتروني";
@@ -124,7 +124,7 @@ const CodeGenerator = ({ initialPrompt = "" }: CodeGeneratorProps) => {
   };
 
   // Functions for generating specific site types
-  const generateSpotifyLikeFrontend = (lang, promptText) => {
+  const generateSpotifyLikeFrontend = (lang: string, promptText: string) => {
     if (lang === "javascript" || lang === "react") {
       return `// React Component for a Spotify-like ${promptText}
 import React, { useState, useEffect } from 'react';
@@ -646,7 +646,7 @@ export default MusicApp;`;
     }
   };
 
-  const generateSpotifyLikeBackend = (lang, promptText) => {
+  const generateSpotifyLikeBackend = (lang: string, promptText: string) => {
     if (lang === "python") {
       return `# Python Flask API for Spotify-like ${promptText}
 from flask import Flask, jsonify, request
@@ -941,5 +941,4 @@ app.get('/api/user/recently-played', (req, res) => {
 // Search API
 app.get('/api/search', (req, res) => {
   const query = (req.query.q || '').toLowerCase();
-  if (!query) {
-    return res.json([]);
+  if (!query
